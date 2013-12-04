@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<title>Pass Through</title>
+<script type="text/javascript" src="resources/js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+<link href="resources/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+</head>
+<body>
+	<form pt:id="myForm" class="form-horizontal" role="form">
+		<div class="form-group">
+			<label 
+				pt:id="emailLabel" 
+				pt:for="email"
+				class="col-sm-2 control-label">
+					Email
+			</label>
+			<div class="col-sm-8">
+				<input 
+					pt:id="email" 
+					pt:binding="#{bean.email}"
+					pt:required="true"
+					type="mail"
+					pt:requiredMessage="Insert your email!"
+					pt:validatorMessage="Invalid Email"
+					class="form-control" 
+					placeholder="Email"> 
+						<f:validateRegex 
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</input>
+			</div>
+			<div class="col-sm-2">
+				<h:message for="email"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label 
+				pt:id="passwordLabel" 
+				pt:for="password"
+				class="col-sm-2 control-label">
+					Password
+			</label>
+			<div class="col-sm-8">
+				<input 
+					pt:id="password" 
+					pt:binding="#{bean.password}" 
+					type="password"
+					pt:required="true"
+					pt:requiredMessage="Insert your password!"
+					class="form-control" 
+					placeholder="Password"> 
+				</input>
+			</div>
+			<div class="col-sm-2">
+				<h:message for="password"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label 
+				pt:id="birthDateLabel" 
+				pt:for="birthDate"
+				class="col-sm-2 control-label">
+					Birth Date
+			</label>
+			<div class="col-sm-8">
+				<input 
+					pt:id="birthDate" 
+					pt:binding="#{bean.input}" 
+					type="date"
+					pt:required="true"
+					pt:requiredMessage="Insert you birth date!"
+					pt:converterMessage="Invalid Date"
+					class="form-control" 
+					placeholder="Birth Date"> 
+						<f:convertDateTime
+							type="date" 
+							pattern="yyyy-mm-dd" />
+				</input>
+			</div>
+			<div class="col-sm-2">
+				<h:message for="birthDate"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button 
+					type="submit" 
+					pt:action="#{bean.register}"
+					class="btn btn-default">Register</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

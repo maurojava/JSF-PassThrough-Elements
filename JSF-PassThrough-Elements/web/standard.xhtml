@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Pass Through</title>
+</h:head>
+<h:body>
+	<h:form id="myForm">
+		<p:panelGrid columns="3">
+			<p:outputLabel for="email" value="Email"/>
+			<p:inputText
+				id="email"
+				binding="#{bean.email}"
+				required="true"
+				requiredMessage="Insert your email!"
+				validatorMessage="Invalid Email">
+					<!-- Email Regex Validator -->
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</p:inputText>
+			<p:message for="email"/>
+			<p:outputLabel for="password" value="Password"/>
+			<p:password 
+				required="true"
+				requiredMessage="Insert your password"
+				validatorMessage="Password must be 8 characters long"
+				binding="#{bean.password}"
+				id="password">
+				<f:validateLength minimum="8"/>
+			</p:password>
+			<p:message for="password"/>
+			<p:outputLabel for="birthDate" value="Birth Date"/>
+			<p:calendar 
+				id="birthDate"
+				binding="#{bean.date}"
+				required="true"
+				requiredMessage="Insert you birth date!"
+				converterMessage="Invalid Date"
+				pattern="mm/dd/yyyy">
+				<f:convertDateTime
+					type="date" 
+					pattern="mm/dd/yyyy" />
+			</p:calendar>
+			<p:message for="birthDate"/>
+			<f:facet name="footer">  
+        		<p:commandButton 
+        			process="@form"
+        			update="@form"
+        			value="Register"
+        			action="#{bean.register}"/>  
+    		</f:facet>  
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
